@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrailQuest | Adventure & Trekking</title>
+   
+</head>
+<style>
+    
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f8f7;
+    color: #173449;
+    line-height: 1.6;
+}
+
+header {
+    background: #09283c;
+    color: white;
+    padding: 18px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.logo span {
+    color: #8be45b;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #8be45b;
+}
+
+.book-btn, .btn {
+    display: inline-block;
+    background: #8be45b;
+    color: #09283c;
+    padding: 12px 22px;
+    border-radius: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.book-btn:hover, .btn:hover {
+    background: #6dce3e;
+    transform: translateY(-2px);
+}
+
+/* Hero */
+
+.hero {
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    padding: 65px 5%;
+    color: white;
+    background:
+        linear-gradient(90deg, rgba(4, 25, 39, .9),
+        rgba(4, 25, 39, .2)),
+        url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1800&q=85")
+        center/cover;
+}
+
+.hero-content {
+    max-width: 620px;
+}
+
+.tagline, .small-title {
+    color: #60a943;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 12px;
+}
+
+.hero .tagline {
+    color: #a6f176;
+}
+
+.hero h1 {
+    font-size: clamp(34px, 5vw, 56px);
+    line-height: 1.15;
+    margin: 15px 0;
+}
+
+.hero h1 span {
+    color: #8be45b;
+}
+
+.hero-content > p:not(.tagline) {
+    margin-bottom: 25px;
+    max-width: 480px;
+}
+
+/* Common sections */
+
+.section {
+    padding: 55px 5%;
+}
+
+.section h2, .features h2 {
+    font-size: 30px;
+    margin: 5px 0 12px;
+}
+
+.description {
+    margin-bottom: 25px;
+    color: #607582;
+}
+
+/* Trekking cards */
+
+.route-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.route-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 18px #18364a12;
+    transition: .3s;
+}
+
+.route-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 12px 25px #18364a25;
+}
+
+.route-image {
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.route-image::after {
+    content: "";
+    position: absolute;
+    inset: 45% 0 0;
+    background: linear-gradient(transparent, #071d2bd9);
+}
+
+.route1 {
+    background-image: url("https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=700&q=80");
+}
+
+.route2 {
+    background-image: url("https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=700&q=80");
+}
+
+.route3 {
+    background-image: url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80");
+}
+
+.route4 {
+    background-image: url("https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=700&q=80");
+}
+
+.level {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 1;
+    padding: 5px 10px;
+    border-radius: 20px;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.easy { background: #389e53; }
+.moderate { background: #2387dc; }
+.hard { background: #ee762c; }
+.expert { background: #d93939; }
+
+.route-info {
+    padding: 16px;
+}
+
+.route-info h3 {
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+.route-info p {
+    color: #71818a;
+    font-size: 13px;
+}
+
+.route-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-top: 1px solid #e7edef;
+    margin-top: 12px;
+    padding-top: 12px;
+    font-size: 12px;
+}
+
+.route-details strong {
+    color: #14804a;
+    font-size: 15px;
+}
+
+/* Camping and difficulty */
+
+.features {
+    padding: 0 5% 45px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+}
+
+.camping-box {
+    padding: 35px;
+    min-height: 310px;
+    border-radius: 14px;
+    color: white;
+    background:
+        linear-gradient(90deg, #061e30e8, #061e3030),
+        url("https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=1000&q=80")
+        center/cover;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.camping-box .small-title {
+    color: #a6f176;
+}
+
+.camping-box p:not(.small-title) {
+    margin-bottom: 20px;
+    max-width: 360px;
+}
+
+.difficulty-box {
+    background: white;
+    border-radius: 14px;
+    padding: 25px;
+}
+
+.difficulty-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.difficulty-list div {
+    background: #f2f7f5;
+    border-radius: 10px;
+    padding: 15px 8px;
+    text-align: center;
+}
+
+.difficulty-list span {
+    font-size: 30px;
+}
+
+.difficulty-list h3 {
+    font-size: 13px;
+    margin: 8px 0;
+}
+
+.difficulty-list p {
+    color: #627783;
+    font-size: 11px;
+}
+
+/* Schedule */
+
+.schedule {
+    background: #eaf3ef;
+}
+
+.schedule-list {
+    max-width: 750px;
+    margin-top: 25px;
+}
+
+.schedule-list div {
+    display: flex;
+    gap: 25px;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: white;
+    border-radius: 8px;
+    border-left: 4px solid #72cf48;
+}
+
+.schedule-list strong {
+    color: #24814d;
+    min-width: 65px;
+}
+
+/* Equipment */
+
+.equipment {
+    background: white;
+}
+
+.equipment-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.equipment-list p {
+    padding: 15px;
+    border-radius: 8px;
+    background: #f2f7f5;
+}
+
+/* Safety */
+
+.safety {
+    background: #102f43;
+    color: white;
+}
+
+.safety h2 {
+    color: white;
+}
+
+.safety ul {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.safety li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ffffff20;
+}
+
+/* Pricing */
+
+.package-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-top: 30px;
+}
+
+.package-card {
+    background: white;
+    text-align: center;
+    padding: 30px 20px;
+    border: 1px solid #dbe6df;
+    border-radius: 14px;
+    position: relative;
+    transition: .3s;
+}
+
+.package-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px #18364a15;
+}
+
+.package-card h3 {
+    color: #23834c;
+}
+
+.package-card h2 {
+    color: #102f43;
+    margin: 15px 0;
+}
+
+.package-card p {
+    color: #687c85;
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+.popular {
+    border: 2px solid #4b9bff;
+}
+
+.premium {
+    border-color: #b79af4;
+}
+
+.popular-label {
+    position: absolute;
+    top: -13px;
+    right: 15px;
+    background: #2387dc;
+    color: white;
+    padding: 4px 10px;
+    font-size: 11px;
+    border-radius: 15px;
+}
+
+.package-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 18px;
+    border-radius: 25px;
+    background: #e9f6e5;
+    color: #246d3d;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Contact */
+
+.contact {
+    background: #eaf3ef;
+    text-align: center;
+}
+
+.contact form {
+    max-width: 480px;
+    margin: 25px auto 0;
+    display: grid;
+    gap: 14px;
+}
+
+.contact input, .contact select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #d3dfd9;
+    border-radius: 8px;
+    font-size: 15px;
+    background: white;
+}
+
+.contact .btn {
+    font-size: 15px;
+}
+
+/* Footer */
+
+footer {
+    background: #09283c;
+    color: white;
+    text-align: center;
+    padding: 30px 15px;
+}
+
+footer p {
+    margin-top: 8px;
+    color: #bdccd5;
+    font-size: 13px;
+}
+
+/* Responsive design */
+
+@media (max-width: 1000px) {
+    .route-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    header {
+        justify-content: center;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .difficulty-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+    }
+
+    nav {
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .hero {
+        min-height: 400px;
+        padding: 45px 6%;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .route-container,
+    .package-container,
+    .equipment-list {
+        grid-template-columns: 1fr;
+    }
+
+    .section {
+        padding: 40px 5%;
+    }
+
+    .features {
+        padding: 0 5% 35px;
+    }
+
+    .camping-box {
+        padding: 25px;
+    }
+
+    .schedule-list div {
+        gap: 12px;
+        font-size: 13px;
+    }
+}
+
+</style>
+<body>
+
+<!-- Navigation -->
+<header>
+    <a href="#home" class="logo">🏔 Trail<span>Quest</span></a>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#routes">Trekking Routes</a>
+        <a href="#camping">Camping</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#packages">Packages</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <a href="#packages" class="book-btn">Book Your Trip</a>
+</header>
+
+<!-- Hero Section -->
+<section class="hero" id="home">
+    <div class="hero-content">
+        <p class="tagline">EXPLORE NATURE • CONQUER YOURSELF</p>
+        <h1>Trekking Adventures<br>
+            That <span>Stay With You</span>
+        </h1>
+        <p>
+            Discover breathtaking trails, camp under the stars,
+            and create memories for a lifetime.
+        </p>
+        <a href="#routes" class="btn">Explore Trekking Routes →</a>
+    </div>
+</section>
+
+<!-- Trekking Routes -->
+<section class="section" id="routes">
+    <p class="small-title">FEATURED ADVENTURES</p>
+    <h2>Trekking Routes</h2>
+    <p class="description">
+        From easy weekend hikes to challenging mountain treks,
+        we have something for every adventurer.
+    </p>
+
+    <div class="route-container">
+
+        <div class="route-card">
+            <div class="route-image route1">
+                <span class="level easy">Beginner Friendly</span>
+            </div>
+            <div class="route-info">
+                <h3>Kodachadri Trek</h3>
+                <p>📍 Karnataka</p>
+                <div class="route-details">
+                    <span>↗ 16 km</span>
+                    <span>◷ 2 Days</span>
+                    <strong>₹2,999</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="route-card">
+            <div class="route-image route2">
+                <span class="level moderate">Moderate</span>
+            </div>
+            <div class="route-info">
+                <h3>Himalayan Base Camp</h3>
+                <p>📍 Uttarakhand</p>
+                <div class="route-details">
+                    <span>↗ 45 km</span>
+                    <span>◷ 5 Days</span>
+                    <strong>₹7,499</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="route-card">
+            <div class="route-image route3">
+                <span class="level hard">Challenging</span>
+            </div>
+            <div class="route-info">
+                <h3>Kedarkantha Trek</h3>
+                <p>📍 Uttarakhand</p>
+                <div class="route-details">
+                    <span>↗ 20 km</span>
+                    <span>◷ 6 Days</span>
+                    <strong>₹6,999</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="route-card">
+            <div class="route-image route4">
+                <span class="level expert">Expert</span>
+            </div>
+            <div class="route-info">
+                <h3>Stok Kangri Trek</h3>
+                <p>📍 Ladakh</p>
+                <div class="route-details">
+                    <span>↗ 12 km</span>
+                    <span>◷ 7 Days</span>
+                    <strong>₹12,999</strong>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Camping and Difficulty -->
+<section class="features" id="camping">
+
+    <div class="camping-box">
+        <p class="small-title">CAMPING TRIPS</p>
+        <h2>Sleep Under<br>A Million Stars</h2>
+        <p>
+            Experience the tranquillity of nature with our
+            camping trips and beautiful mountain views.
+        </p>
+        <a href="#packages" class="btn">Explore Camping →</a>
+    </div>
+
+    <div class="difficulty-box">
+        <p class="small-title">CHOOSE YOUR CHALLENGE</p>
+        <h2>Difficulty Levels</h2>
+
+        <div class="difficulty-list">
+            <div>
+                <span>🥾</span>
+                <h3>Easy</h3>
+                <p>Perfect for beginners.</p>
+            </div>
+            <div>
+                <span>⛰️</span>
+                <h3>Moderate</h3>
+                <p>Some experience needed.</p>
+            </div>
+            <div>
+                <span>🧗</span>
+                <h3>Challenging</h3>
+                <p>For experienced trekkers.</p>
+            </div>
+            <div>
+                <span>🏔️</span>
+                <h3>Expert</h3>
+                <p>Advanced trekking skills.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Trip Schedule -->
+<section class="schedule section" id="schedule">
+    <p class="small-title">PLAN YOUR JOURNEY</p>
+    <h2>5-Day Trip Schedule</h2>
+
+    <div class="schedule-list">
+        <div><strong>DAY 01</strong><span>Arrival & Acclimatization</span></div>
+        <div><strong>DAY 02</strong><span>Trek to Base Camp</span></div>
+        <div><strong>DAY 03</strong><span>Explore Mountains & Camp</span></div>
+        <div><strong>DAY 04</strong><span>Summit / Main Trek</span></div>
+        <div><strong>DAY 05</strong><span>Return Journey</span></div>
+    </div>
+</section>
+
+<!-- Equipment Checklist -->
+<section class="equipment section">
+    <p class="small-title">BE PREPARED</p>
+    <h2>Equipment Checklist</h2>
+
+    <div class="equipment-list">
+        <p>✅ Trekking Shoes</p>
+        <p>✅ Water Bottle</p>
+        <p>✅ Backpack</p>
+        <p>✅ Food & Snacks</p>
+        <p>✅ Tent & Sleeping Bag</p>
+        <p>✅ First Aid Kit</p>
+        <p>✅ Warm Clothing</p>
+        <p>✅ Headlamp / Flashlight</p>
+        <p>✅ Rain Jacket</p>
+        <p>✅ Sunscreen</p>
+        <p>✅ Trekking Poles</p>
+        <p>✅ Personal Essentials</p>
+    </div>
+</section>
+
+<!-- Safety Guidelines -->
+<section class="safety section">
+    <p class="small-title">STAY SAFE</p>
+    <h2>Safety Guidelines</h2>
+
+    <ul>
+        <li>✔ Follow your trekking guide's instructions.</li>
+        <li>✔ Stay hydrated and carry enough food.</li>
+        <li>✔ Check weather conditions before departure.</li>
+        <li>✔ Never trek alone on unfamiliar routes.</li>
+        <li>✔ Respect nature and local culture.</li>
+    </ul>
+</section>
+
+<!-- Packages -->
+<section class="section" id="packages">
+    <p class="small-title">CHOOSE YOUR ADVENTURE</p>
+    <h2>Packages & Pricing</h2>
+
+    <div class="package-container">
+
+        <div class="package-card">
+            <h3>Basic</h3>
+            <p>3 Days / 2 Nights</p>
+            <h2>₹2,999</h2>
+            <p>Guided trek</p>
+            <p>Camping accommodation</p>
+            <p>Basic meals</p>
+            <a href="#contact" class="package-btn">View Details →</a>
+        </div>
+
+        <div class="package-card popular">
+            <span class="popular-label">POPULAR</span>
+            <h3>Standard</h3>
+            <p>5 Days / 4 Nights</p>
+            <h2>₹6,999</h2>
+            <p>Expert trekking guide</p>
+            <p>Meals and camping</p>
+            <p>Safety equipment</p>
+            <a href="#contact" class="package-btn">View Details →</a>
+        </div>
+
+        <div class="package-card premium">
+            <h3>Premium</h3>
+            <p>7 Days / 6 Nights</p>
+            <h2>₹12,999</h2>
+            <p>Personalized guidance</p>
+            <p>Premium camping</p>
+            <p>All-inclusive itinerary</p>
+            <a href="#contact" class="package-btn">View Details →</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- Contact -->
+<section class="contact section" id="contact">
+    <p class="small-title">YOUR NEXT ADVENTURE STARTS HERE</p>
+    <h2>Ready to Explore?</h2>
+    <p>Contact us to plan your next unforgettable trekking trip.</p>
+
+    <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+
+        <select required>
+            <option value="">Select a Package</option>
+            <option>Basic - ₹2,999</option>
+            <option>Standard - ₹6,999</option>
+            <option>Premium - ₹12,999</option>
+        </select>
+
+        <button type="submit" class="btn">Send Enquiry →</button>
+    </form>
+</section>
+
+<!-- Footer -->
+<footer>
+    <a href="#home" class="logo">🏔 Trail<span>Quest</span></a>
+    <p>Explore • Trek • Belong</p>
+    <p>© 2026 TrailQuest. Adventure awaits!</p>
+</footer>
+
+</body>
+</html>
